@@ -1,7 +1,7 @@
 # flask, env
 from dotenv import load_dotenv
 from os import getenv
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template
 from flask_pymongo import PyMongo
 
 # modeling
@@ -9,10 +9,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
-from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import load_model
 
 # Load environment variables
 load_dotenv()
@@ -60,10 +57,8 @@ def home():
     # Find one record of data from the mongo database
     iris_data = mongo.db.iris.find_one({},{'_id':False})
 
-    print(f'doc: {iris_data}')
-
-    predicted_class = ""
-    predicted_name = ""
+    predicted_class = "?"
+    predicted_name = "???"
 
     # Return template and data
     return render_template("index.html",
@@ -76,13 +71,9 @@ def predict():
 
     # pull mongo data
     iris_data = mongo.db.iris.find_one({},{'_id':False})
-    print(f'doc: {iris_data}')
-
-    # load model
-    print("iris_model")
 
     # run pred func
-    data, predicted_class, predicted_name = predict_class(iris_data, model)
+    _, predicted_class, predicted_name = predict_class(iris_data, model)
 
     # Return template and data
     return render_template("index.html", 

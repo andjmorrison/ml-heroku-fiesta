@@ -1,5 +1,8 @@
 # ml-heroku-fiesta
-Example Heroku app using TF and Flask
+Example Heroku app using Tensorflow and Flask. See deployed site [here](https://iris-ml-fun.herokuapp.com/).
+
+Steps:
+* [x] Train model.
 * [x] Save model post-training.
 * [x] Generate req file and purge unused libraries. 
 * [x] Procfile for Heroku app startup.
@@ -17,4 +20,4 @@ FAQ
 
 > My deployment is too big! Heroku says they only host 500 mb for my app.
 
-* Pare down the packages you're using in your req file. Only configure your app with the packages you need. If you have done that and you are still over the limit, change the package(s) used. The default version of Tensorflow (currently 2.4) defaults to the GPU version, which may contain unneeded functions, etc. In that case, specify the CPU version explicity.
+* Pare down the packages you're using in your req file. Only configure your app with the packages you need. If you have done that and you are still over the limit, change the package(s) used. The default version of Tensorflow (currently 2.4) defaults to the GPU version, which may contain unneeded functions, etc. In that case, specify the CPU version explicitly.
